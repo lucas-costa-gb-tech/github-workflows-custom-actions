@@ -2,6 +2,12 @@ name: "Handle Deps"
 
 description: "Install the dependencies and cache them"
 
+inputs:
+  lock-file-path:
+    description: "The lock file path"
+    required: false
+    default: "**/package-lock.json"
+
 runs:
   using: "composite"
   steps:
@@ -10,7 +16,7 @@ runs:
       uses: actions/cache@v3
       with:
         path: node_modules
-        key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+        key: deps-node-modules-${{ hashFiles(inputs.lock-file-path) }}
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
