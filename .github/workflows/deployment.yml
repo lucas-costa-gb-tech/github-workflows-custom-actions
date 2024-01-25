@@ -13,8 +13,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Handle Deps
         uses: ./.github/actions/handle-deps
-      - name: Deploy to AWS S3
-        uses: ./.github/actions/deploy-s3
       - name: Lint code
         run: npm run lint
   test:
@@ -48,6 +46,11 @@ jobs:
         with:
           name: dist-files
           path: dist
+      - name: Deploy to AWS S3
+        uses: ./.github/actions/deploy-s3
+        with:
+          bucket-name: "gh-training"
+          bucket-region: "br-sp-1"
   deploy:
     needs: build
     runs-on: ubuntu-latest
