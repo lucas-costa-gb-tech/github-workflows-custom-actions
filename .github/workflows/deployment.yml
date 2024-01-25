@@ -60,7 +60,10 @@ jobs:
       - name: Output contents
         run: ls
       - name: Deploy to AWS S3
+        id: "deploy-s3"
         uses: ./.github/actions/deploy-s3
         with:
           bucket-name: "gh-training"
           bucket-region: "br-sp-1"
+      - name: Output app URL
+        run: echo "Deployed in ${{ steps.deploy-s3.outputs.app-url }}"

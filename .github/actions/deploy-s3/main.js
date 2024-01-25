@@ -9,3 +9,5 @@ const distFolder = core.getInput('dist-folder');
 core.notice(`O nome do bucket é ${bucketName}`);
 core.notice(`A região do bucket é ${bucketRegion}`);
 core.notice(`A pasta que deve ser usada para deploy é ${distFolder}`);
+
+core.setOutput('app-url', 'https://www.gh-training.com');
