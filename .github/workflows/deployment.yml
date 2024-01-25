@@ -46,11 +46,6 @@ jobs:
         with:
           name: dist-files
           path: dist
-      - name: Deploy to AWS S3
-        uses: ./.github/actions/deploy-s3
-        with:
-          bucket-name: "gh-training"
-          bucket-region: "br-sp-1"
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -64,5 +59,8 @@ jobs:
           path: ./dist
       - name: Output contents
         run: ls
-      - name: Deploy site
-        run: echo "Deploying..."
+      - name: Deploy to AWS S3
+        uses: ./.github/actions/deploy-s3
+        with:
+          bucket-name: "gh-training"
+          bucket-region: "br-sp-1"
